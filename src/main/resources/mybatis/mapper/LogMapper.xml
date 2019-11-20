@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.mapper.LogMapper">
+
+    <resultMap id="result-log" type="richan_log">
+        <result property="id" column="id"/>
+        <result property="application_number" column="application_number"/>
+        <result property="DataFrom" column="DataFrom"/>
+        <result property="richanlog" column="richanlog"/>
+        <result property="entryid" column="entryid"/>
+        <result property="title" column="title"/>
+        <result property="createtime" column="createtime"/>
+    </resultMap>
+    <select id="find" resultMap="result-log">
+        SELECT *
+        FROM richan_log
+        <where>
+            1 = 1
+            <if test="application_number != null and application_number != ''">
+                and application_number like concat('%',#{application_number},'%')
+            </if>
+            <if test="DataFrom != null and DataFrom != ''">
+                and DataFrom like concat('%',#{DataFrom},'%')
+            </if>
+            <if test="richanlog != null and richanlog != ''">
+                and richanlog like concat('%',#{richanlog},'%')
+            </if>
+            <if test="entryid != null and entryid != ''">
+                and entryid like concat('%',#{entryid},'%')
+            </if>
+            <if test="title != null and title != ''">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test="createtime != null and createtime != ''">
+                and createtime like concat('%',#{createtime},'%')
+            </if>
+        </where>
+        LIMIT #{page},#{size}
+    </select>
+    <select id="getTotal" resultType="Long">
+        SELECT count(*)
+        FROM richan_log
+        <where>
+            1 = 1
+            <if test="application_number != null and application_number != ''">
+                and application_number like concat('%',#{application_number},'%')
+            </if>
+            <if test="DataFrom != null and DataFrom != ''">
+                and DataFrom like concat('%',#{DataFrom},'%')
+            </if>
+            <if test="richanlog != null and richanlog != ''">
+                and richanlog like concat('%',#{richanlog},'%')
+            </if>
+            <if test="entryid != null and entryid != ''">
+                and entryid like concat('%',#{entryid},'%')
+            </if>
+            <if test="title != null and title != ''">
+                and title like concat('%',#{title},'%')
+            </if>
+            <if test="createtime != null and createtime != ''">
+                and createtime like concat('%',#{createtime},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>
